@@ -1,14 +1,10 @@
 package com.raulvalesc.favslistsapi.shared.domain.valueobjects;
 
 public abstract class BooleanValueObject {
-    private final Boolean value;
+    public final Boolean value;
 
     protected BooleanValueObject(Boolean value) {
         this.value = value;
-    }
-
-    public Boolean value() {
-        return value;
     }
 
     public boolean equals(Object o) {

@@ -1,14 +1,10 @@
 package com.raulvalesc.favslistsapi.shared.domain.valueobjects;
 
 public abstract class IntegerValueObject {
-    private final Integer value;
+    public final Integer value;
 
     protected IntegerValueObject(Integer value) {
         this.value = value;
-    }
-
-    public Integer value() {
-        return value;
     }
 
     public boolean equals(Object o) {

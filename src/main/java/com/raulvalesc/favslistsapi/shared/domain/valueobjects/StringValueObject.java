@@ -3,16 +3,12 @@ package com.raulvalesc.favslistsapi.shared.domain.valueobjects;
 import com.raulvalesc.favslistsapi.shared.domain.valueobjects.exceptions.EmptyStringNotValidException;
 
 public abstract class StringValueObject {
-    private final String value;
+    public final String value;
 
     protected StringValueObject(String value) {
         this.value = value;
 
         this.ensureIsNotEmptyOrNull(value);
-    }
-
-    public String value() {
-        return value;
     }
 
     public boolean equals(Object o) {

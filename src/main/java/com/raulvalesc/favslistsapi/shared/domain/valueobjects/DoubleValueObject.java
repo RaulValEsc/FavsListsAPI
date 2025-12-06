@@ -1,14 +1,10 @@
 package com.raulvalesc.favslistsapi.shared.domain.valueobjects;
 
 public abstract class DoubleValueObject {
-    private final Double value;
+    public final Double value;
 
     protected DoubleValueObject(Double value) {
         this.value = value;
-    }
-
-    public Double value() {
-        return value;
     }
 
     public boolean equals(Object o) {
