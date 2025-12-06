@@ -1,10 +1,14 @@
 package com.raulvalesc.favslistsapi.shared.domain.valueobjects;
 
+import com.raulvalesc.favslistsapi.shared.domain.valueobjects.exceptions.EmptyStringNotValidException;
+
 public abstract class StringValueObject {
     private final String value;
 
     protected StringValueObject(String value) {
         this.value = value;
+
+        this.ensureIsNotEmptyOrNull(value);
     }
 
     public String value() {
@@ -27,5 +31,11 @@ public abstract class StringValueObject {
 
     public int hashCode() {
         return value.hashCode();
+    }
+
+    private void ensureIsNotEmptyOrNull(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new EmptyStringNotValidException();
+        }
     }
 }
