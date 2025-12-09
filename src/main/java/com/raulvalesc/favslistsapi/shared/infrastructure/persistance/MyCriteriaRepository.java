@@ -17,11 +17,11 @@ import java.util.List;
 public abstract class MyCriteriaRepository<Entity, EntityId> {
     private final Class<Entity> entityClass;
 
-    @Autowired
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
-    protected MyCriteriaRepository(Class<Entity> entityClass) {
+    protected MyCriteriaRepository(Class<Entity> entityClass, EntityManager entityManager) {
         this.entityClass = entityClass;
+        this.entityManager = entityManager;
     }
 
     @Transactional
@@ -148,12 +148,38 @@ public abstract class MyCriteriaRepository<Entity, EntityId> {
     }
 
     private Path<?> generateVariableRootPath(String variableName, Root<Entity> root) {
+        String[] parts = variableName.split("\\.");
+
+        From<?, ?> from = root;
+
         Path<?> path = root;
 
-        for (String variable : variableName.split("\\.")) {
-            path = path.get(variable);
+        for (int i = 0; i < parts.length; i++) {
+            String part = parts[i];
+
+            Class<?> javaType = from.get(part).getJavaType();
+
+            boolean isLast = (i == parts.length - 1);
+
+            if (!isLast) {
+                if (isEntity(javaType)) {
+                    from = from.join(part, JoinType.LEFT);
+
+                    path = from;
+
+                    continue;
+                }
+
+                path = path.get(part);
+            } else {
+                path = path.get(part);
+            }
         }
 
         return path;
+    }
+
+    private boolean isEntity(Class<?> clazz) {
+        return clazz.getAnnotation(jakarta.persistence.Entity.class) != null;
     }
 }
