@@ -1,10 +1,10 @@
 package com.raulvalesc.favslistsapi.modules.users.domain;
 
-import com.raulvalesc.favslistsapi.shared.domain.aggregateroot.*;
+import com.raulvalesc.favslistsapi.shared.domain.entity.*;
 
 import java.time.Instant;
 
-public class User extends AggregateRoot<UserPrimitives> {
+public class User extends Entity<UserPrimitives> {
     public final UserEmail email;
 
     public final UserId id;
@@ -13,7 +13,7 @@ public class User extends AggregateRoot<UserPrimitives> {
 
     public final UserPassword password;
 
-    private User(AggregateRootCreatedAt createdAt, AggregateRootDeletedAt deletedAt, UserEmail email, UserId id, AggregateRootIsDeleted isDeleted, UserName name, UserPassword password, AggregateRootUpdatedAt updatedAt) {
+    private User(EntityCreatedAt createdAt, EntityDeletedAt deletedAt, UserEmail email, UserId id, EntityIsDeleted isDeleted, UserName name, UserPassword password, EntityUpdatedAt updatedAt) {
         super(createdAt, deletedAt, isDeleted, updatedAt);
 
         this.email = email;
@@ -40,14 +40,14 @@ public class User extends AggregateRoot<UserPrimitives> {
 
     public static User fromPrimitives(UserPrimitives primitives) {
         return new User(
-                primitives.getCreatedAt() != null ? new AggregateRootCreatedAt(primitives.getCreatedAt()) : null,
-                primitives.getDeletedAt() != null ? new AggregateRootDeletedAt(primitives.getDeletedAt()) : null,
+                primitives.getCreatedAt() != null ? new EntityCreatedAt(primitives.getCreatedAt()) : null,
+                primitives.getDeletedAt() != null ? new EntityDeletedAt(primitives.getDeletedAt()) : null,
                 primitives.getEmail() != null ? new UserEmail(primitives.getEmail()) : null,
                 primitives.getId() != null ? new UserId(primitives.getId()) : null,
-                primitives.getIsDeleted() != null ? new AggregateRootIsDeleted(primitives.getIsDeleted()) : null,
+                primitives.getIsDeleted() != null ? new EntityIsDeleted(primitives.getIsDeleted()) : null,
                 primitives.getName() != null ? new UserName(primitives.getName()) : null,
                 primitives.getPassword() != null ? new UserPassword(primitives.getPassword()) : null,
-                primitives.getUpdatedAt() != null ? new AggregateRootUpdatedAt(primitives.getUpdatedAt()) : null
+                primitives.getUpdatedAt() != null ? new EntityUpdatedAt(primitives.getUpdatedAt()) : null
         );
     }
 

@@ -4,7 +4,7 @@ import com.raulvalesc.favslistsapi.modules.users.domain.User;
 import com.raulvalesc.favslistsapi.modules.users.domain.UserId;
 import com.raulvalesc.favslistsapi.modules.users.domain.UserPrimitives;
 import com.raulvalesc.favslistsapi.modules.users.domain.UserRepository;
-import com.raulvalesc.favslistsapi.modules.users.infrastructure.persistence.hibernate.UserEntity;
+import com.raulvalesc.favslistsapi.modules.users.infrastructure.persistence.hibernate.JPAUser;
 import com.raulvalesc.favslistsapi.shared.domain.criteria.Criteria;
 import com.raulvalesc.favslistsapi.shared.domain.criteria.SearchResponse;
 import com.raulvalesc.favslistsapi.shared.domain.injectable.Injectable;
@@ -12,26 +12,26 @@ import com.raulvalesc.favslistsapi.shared.infrastructure.persistance.MyCriteriaR
 import jakarta.persistence.EntityManager;
 
 @Injectable
-public class JpaUserRepository extends MyCriteriaRepository<UserEntity, String> implements UserRepository {
+public class JpaUserRepository extends MyCriteriaRepository<JPAUser, String> implements UserRepository {
     public JpaUserRepository(EntityManager entityManager) {
-        super(UserEntity.class, entityManager);
+        super(JPAUser.class, entityManager);
     }
 
     @Override
     public void create(User user) {
-        this._save(UserEntity.fromPrimitives(user.toPrimitives()));
+        this._save(JPAUser.fromPrimitives(user.toPrimitives()));
     }
 
     @Override
     public void delete(User user) {
-        this._remove(UserEntity.fromPrimitives(user.toPrimitives()));
+        this._remove(JPAUser.fromPrimitives(user.toPrimitives()));
     }
 
     @Override
     public SearchResponse<UserPrimitives> searchByCriteria(Criteria criteria) {
-        SearchResponse<UserEntity> searchResponse = this._searchByCriteria(criteria);
+        SearchResponse<JPAUser> searchResponse = this._searchByCriteria(criteria);
 
-        return new SearchResponse<UserPrimitives>(searchResponse.total, searchResponse.results.stream().map(UserEntity::toPrimitives).toList());
+        return new SearchResponse<UserPrimitives>(searchResponse.total, searchResponse.results.stream().map(JPAUser::toPrimitives).toList());
     }
 
     @Override
@@ -41,6 +41,6 @@ public class JpaUserRepository extends MyCriteriaRepository<UserEntity, String> 
 
     @Override
     public void update(User user) {
-        this._update(UserEntity.fromPrimitives(user.toPrimitives()));
+        this._update(JPAUser.fromPrimitives(user.toPrimitives()));
     }
 }

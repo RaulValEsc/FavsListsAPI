@@ -1,7 +1,7 @@
 package com.raulvalesc.favslistsapi.modules.users.infrastructure.persistence.hibernate;
 
 import com.raulvalesc.favslistsapi.modules.users.domain.*;
-import com.raulvalesc.favslistsapi.shared.infrastructure.persistance.hibernate.AggregateRootEntity;
+import com.raulvalesc.favslistsapi.shared.infrastructure.persistance.hibernate.JPAEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -10,7 +10,7 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "Users")
-public class UserEntity extends AggregateRootEntity {
+public class JPAUser extends JPAEntity {
     private String email;
 
     @Id
@@ -20,9 +20,9 @@ public class UserEntity extends AggregateRootEntity {
 
     private String password;
 
-    protected UserEntity() {}
+    protected JPAUser() {}
 
-    private UserEntity(Instant createdAt, Instant deletedAt, String email, String id, Boolean isDeleted, String name, String password, Instant updatedAt) {
+    private JPAUser(Instant createdAt, Instant deletedAt, String email, String id, Boolean isDeleted, String name, String password, Instant updatedAt) {
         super(createdAt, deletedAt, isDeleted, updatedAt);
 
         this.email = email;
@@ -31,8 +31,8 @@ public class UserEntity extends AggregateRootEntity {
         this.password = password;
     }
 
-    public static UserEntity fromPrimitives(UserPrimitives primitives) {
-        return new UserEntity(
+    public static JPAUser fromPrimitives(UserPrimitives primitives) {
+        return new JPAUser(
                 primitives.getCreatedAt(),
                 primitives.getDeletedAt(),
                 primitives.getEmail(),

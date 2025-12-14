@@ -5,7 +5,7 @@ import jakarta.persistence.MappedSuperclass;
 import java.time.Instant;
 
 @MappedSuperclass
-public class AggregateRootEntity {
+public class JPAEntity {
     protected Instant createdAt;
 
     protected Instant deletedAt;
@@ -14,9 +14,9 @@ public class AggregateRootEntity {
 
     protected Instant updatedAt;
 
-    protected AggregateRootEntity() {}
+    protected JPAEntity() {}
 
-    protected AggregateRootEntity(Instant createdAt, Instant deletedAt, Boolean isDeleted, Instant updatedAt) {
+    protected JPAEntity(Instant createdAt, Instant deletedAt, Boolean isDeleted, Instant updatedAt) {
         this.createdAt = createdAt;
         this.deletedAt = deletedAt;
         this.isDeleted = isDeleted;

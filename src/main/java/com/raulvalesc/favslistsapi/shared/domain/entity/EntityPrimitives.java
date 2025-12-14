@@ -1,8 +1,8 @@
-package com.raulvalesc.favslistsapi.shared.domain.aggregateroot;
+package com.raulvalesc.favslistsapi.shared.domain.entity;
 
 import java.time.Instant;
 
-public abstract class AggregateRootPrimitives {
+public abstract class EntityPrimitives {
     private Instant createdAt;
 
     private Instant deletedAt;
@@ -11,7 +11,7 @@ public abstract class AggregateRootPrimitives {
 
     private Instant updatedAt;
 
-    public AggregateRootPrimitives(Instant createdAt, Instant deletedAt, Boolean isDeleted, Instant updatedAt) {
+    public EntityPrimitives(Instant createdAt, Instant deletedAt, Boolean isDeleted, Instant updatedAt) {
         this.createdAt = createdAt;
         this.deletedAt = deletedAt;
         this.isDeleted = isDeleted;

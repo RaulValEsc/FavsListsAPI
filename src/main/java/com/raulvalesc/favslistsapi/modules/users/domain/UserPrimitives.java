@@ -1,10 +1,10 @@
 package com.raulvalesc.favslistsapi.modules.users.domain;
 
-import com.raulvalesc.favslistsapi.shared.domain.aggregateroot.AggregateRootPrimitives;
+import com.raulvalesc.favslistsapi.shared.domain.entity.EntityPrimitives;
 
 import java.time.Instant;
 
-public class UserPrimitives extends AggregateRootPrimitives {
+public class UserPrimitives extends EntityPrimitives {
     private String email;
 
     private String id;
