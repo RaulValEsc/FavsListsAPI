@@ -11,6 +11,8 @@ public abstract class EntityPrimitives {
 
     private Instant updatedAt;
 
+    protected EntityPrimitives() {}
+
     public EntityPrimitives(Instant createdAt, Instant deletedAt, Boolean isDeleted, Instant updatedAt) {
         this.createdAt = createdAt;
         this.deletedAt = deletedAt;

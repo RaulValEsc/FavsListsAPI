@@ -13,6 +13,10 @@ public class UserPrimitives extends EntityPrimitives {
 
     private String password;
 
+    public UserPrimitives() {
+        super();
+    }
+
     public UserPrimitives(Instant createdAt, Instant deletedAt, String email, String id, Boolean isDeleted, String name, String password, Instant updatedAt) {
         super(createdAt, deletedAt, isDeleted, updatedAt);
 
